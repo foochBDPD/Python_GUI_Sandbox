@@ -1,27 +1,34 @@
+################################################
+##
+## Author:  Mike Palladino's Keyboard Tester
+##
+## Purpose: This is just a learning 
+##          project for python. This
+##          python script opens a keyboard
+##          tester that turns green when a 
+##          button is pressed. 
+## Date:    9/4/2023
+##
+################################################
+
 #!/usr/bin/env python
 import tkinter as tk
 
 def key_pressed(event):
     key = event.keysym
-    if key in key_colors:
-        key_colors[key] = 'green'
-        update_key_colors()
+    if key in key_buttons:
+        key_buttons[key].config(bg='green')
     
 def key_released(event):
     key = event.keysym
-    if key in key_colors:
-        key_colors[key] = 'red'
-        update_key_colors()
-
-def update_key_colors():
-    for key, color in key_colors.items():
-        key_buttons[key].config(bg=color)
+    if key in key_buttons:
+        key_buttons[key].config(bg='red')
 
 def main():
+    global key_buttons  # Define key_buttons as a global variable
     window = tk.Tk()
     window.title("Keyboard Tester")
 
-    key_colors = {key: 'red' for key in 'qwertyuiopasdfghjklzxcvbnm'}
     key_buttons = {}
 
     row_num = 0
